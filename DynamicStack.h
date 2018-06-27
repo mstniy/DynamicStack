@@ -17,7 +17,7 @@ class DSSG
 private:
 	DynamicStack& dstack;
 	Destructible** objsBackup;
-	uint8_t* ptrBackup;
+	uint64_t* ptrBackup;
 public:
 	DSSG(DynamicStack& _dstack);
 	DSSG(const DSSG&) = delete;
@@ -32,9 +32,9 @@ class DynamicStack
 private:
 	Destructible** objs;
     std::unique_ptr<uint64_t[]> buf;
-    uint8_t* ptr;
+    uint64_t* ptr;
 public:
-	DynamicStack(uint64_t size = 1024*1024);
+	DynamicStack(uint64_t size = 1024*1024/8*2);
 	~DynamicStack() = default;
 	DynamicStack(const DynamicStack&) = delete;
 	DynamicStack(DynamicStack&&) = default;
