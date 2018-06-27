@@ -40,9 +40,6 @@ T* DynamicStack::allocArray(uint64_t n)
 {
 	static_assert(std::is_base_of<Destructible, T>::value || std::is_trivially_destructible<T>::value,
 		"Values allocated from DynamicStack must either inherit from Destructible or be trivially destructible.");
-	uint64_t rounded = sizeof(T);
-	if (rounded%8)
-		rounded += 8 - rounded%8;
     T* res = reinterpret_cast<T*>(ptr);
     ptr += (sizeof(T)+7)/8*n;
     for (uint64_t i=0;i<n;i++)
